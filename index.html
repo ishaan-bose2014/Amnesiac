@@ -126,21 +126,34 @@
   .hero-inner { max-width: 44rem; width: 100%; }
 
   .logo-container {
-    width: 100%;
-    height: 80px;
-    margin-bottom: 1.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    position: fixed;
+    top: 1.5rem;
+    left: 1.5rem;
+    z-index: 99;
+    width: 120px;
+    height: auto;
   }
 
   .logo-container img,
   .logo-container svg {
-    max-width: 100%;
-    max-height: 100%;
-    width: auto;
+    width: 100%;
     height: auto;
     object-fit: contain;
+    opacity: 0.9;
+    transition: opacity 300ms ease;
+  }
+
+  .logo-container:hover img,
+  .logo-container:hover svg {
+    opacity: 1;
+  }
+
+  @media (max-width: 768px) {
+    .logo-container {
+      top: 1rem;
+      left: 1rem;
+      width: 90px;
+    }
   }
 
   .wordmark {
@@ -159,12 +172,12 @@
   }
   .wordmark span:nth-child(1) { --o: 1;    --b: 0; }
   .wordmark span:nth-child(2) { --o: 1;    --b: 0; }
-  .wordmark span:nth-child(3) { --o: 0.98; --b: 0; }
-  .wordmark span:nth-child(4) { --o: 0.92; --b: 0.2px; }
-  .wordmark span:nth-child(5) { --o: 0.78; --b: 0.5px; }
-  .wordmark span:nth-child(6) { --o: 0.58; --b: 1px; }
-  .wordmark span:nth-child(7) { --o: 0.36; --b: 1.8px; }
-  .wordmark span:nth-child(8) { --o: 0.16; --b: 3px; }
+  .wordmark span:nth-child(3) { --o: 0.99; --b: 0; }
+  .wordmark span:nth-child(4) { --o: 0.96; --b: 0.1px; }
+  .wordmark span:nth-child(5) { --o: 0.90; --b: 0.25px; }
+  .wordmark span:nth-child(6) { --o: 0.80; --b: 0.5px; }
+  .wordmark span:nth-child(7) { --o: 0.70; --b: 0.8px; }
+  .wordmark span:nth-child(8) { --o: 0.60; --b: 1.2px; }
 
   .tagline {
     font-size: 0.95rem;
@@ -446,6 +459,10 @@
 <body>
 <div class="field" aria-hidden="true"></div>
 
+<div class="logo-container">
+  <img id="logo" src="amnesiac-logo-dark.svg" alt="Amnesiac logo">
+</div>
+
 <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
   <span id="theme-icon">🌙</span>
 </button>
@@ -453,9 +470,6 @@
 <main>
   <section class="hero">
     <div class="hero-inner">
-      <div class="logo-container">
-        <img id="logo" src="amnesiac-logo-dark.svg" alt="Amnesiac logo" width="200" height="80">
-      </div>
       <p class="tagline">Start Fresh</p>
       <h1 class="wordmark" aria-label="Amnesiac">
         <span style="--i:0">A</span><span style="--i:1">m</span><span style="--i:2">n</span><span style="--i:3">e</span><span style="--i:4">s</span><span style="--i:5">i</span><span style="--i:6">a</span><span style="--i:7">c</span>
