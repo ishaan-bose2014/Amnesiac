@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Amnesiac — start your built-in games over</title>
-<meta name="description" content="Amnesiac wipes the save data from the games that came with your Mac or PC, so you can play them like the first time.">
+<title>Amnesiac — Reset your pre-installed apps</title>
+<meta name="description" content="Amnesiac wipes the user data from any pre-installed app on your Mac or PC, so you can start fresh. Reset games, reclaim space, and restore default settings.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
@@ -24,6 +24,7 @@
     --edge-hi: rgba(255,255,255,0.28);
     --glow-a: #6f8cff;
     --glow-b: #9ad8ff;
+    --accent: #4f9dff;
     --font: "Instrument Sans", "Helvetica Neue", Arial, sans-serif;
   }
   @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --bg: #06080e; } }
@@ -68,13 +69,12 @@
   }
   .hero-inner { max-width: 44rem; width: 100%; }
 
-  /* the memorable thing: the name forgets itself */
   .wordmark {
     font-weight: 600;
     font-size: clamp(3.2rem, 12vw, 7.5rem);
     line-height: 1;
     letter-spacing: -0.04em;
-    margin: 0 0 1.4rem;
+    margin: 0 0 0.6rem;
     display: inline-flex;
   }
   .wordmark span {
@@ -92,11 +92,22 @@
   .wordmark span:nth-child(7) { --o: 0.36; --b: 1.8px; }
   .wordmark span:nth-child(8) { --o: 0.16; --b: 3px; }
 
+  .tagline {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--accent);
+    margin: 0 0 1.2rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    opacity: 0.9;
+  }
+
   .lede {
     font-size: clamp(1.1rem, 2.4vw, 1.35rem);
     color: var(--ink-2);
     max-width: 30rem;
     margin: 0 auto 2.6rem;
+    line-height: 1.6;
   }
 
   .downloads {
@@ -124,9 +135,10 @@
       0 10px 30px rgba(0,0,0,0.35);
     backdrop-filter: blur(18px) saturate(140%);
     -webkit-backdrop-filter: blur(18px) saturate(140%);
-    transition: border-color 160ms ease, transform 160ms ease;
+    transition: border-color 160ms ease, transform 160ms ease, background 160ms ease;
+    cursor: pointer;
   }
-  .btn:hover { border-color: var(--edge-hi); transform: translateY(-1px); }
+  .btn:hover { border-color: var(--edge-hi); transform: translateY(-1px); background: linear-gradient(180deg, rgba(255,255,255,0.12), rgba(255,255,255,0.06)); }
   .btn:active { transform: translateY(0); }
   .btn:focus-visible { outline: 2px solid var(--glow-b); outline-offset: 3px; }
   .btn svg { width: 18px; height: 18px; fill: currentColor; opacity: 0.9; }
@@ -137,63 +149,223 @@
     color: var(--ink-3);
   }
 
+  section {
+    scroll-margin-top: 2rem;
+  }
+
   .how {
-    padding: 2rem 1.5rem 6rem;
-    max-width: 52rem;
+    padding: 5rem 1.5rem 6rem;
+    max-width: 62rem;
     margin: 0 auto;
   }
-  .how h2 {
-    font-size: 1.05rem;
-    font-weight: 500;
-    color: var(--ink-2);
-    margin: 0 0 1.4rem;
+
+  .section-title {
+    font-size: 2rem;
+    font-weight: 600;
+    margin: 0 0 3rem;
     text-align: center;
+    background: linear-gradient(135deg, var(--ink), var(--ink-2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
+
   .steps {
     list-style: none; padding: 0; margin: 0;
-    display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.9rem;
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem;
     counter-reset: step;
   }
   .steps li {
     counter-increment: step;
-    padding: 1.4rem 1.3rem 1.5rem;
+    padding: 2rem 1.5rem;
     border-radius: 20px;
     background: var(--glass);
     border: 1px solid var(--edge);
     box-shadow: inset 0 1px 0 rgba(255,255,255,0.10);
     backdrop-filter: blur(14px);
     -webkit-backdrop-filter: blur(14px);
+    transition: all 300ms ease;
+    cursor: pointer;
   }
+  .steps li:hover {
+    border-color: var(--edge-hi);
+    background: rgba(111,140,255,0.08);
+    transform: translateY(-2px);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.10), 0 20px 40px rgba(111,140,255,0.15);
+  }
+
+  .step-icon {
+    width: 3rem;
+    height: 3rem;
+    margin: 0 auto 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, rgba(79,157,255,0.2), rgba(154,216,255,0.1));
+    border-radius: 12px;
+    border: 1px solid var(--edge-hi);
+    font-size: 1.5rem;
+  }
+
   .steps li::before {
     content: counter(step);
     display: inline-grid; place-items: center;
     width: 1.75rem; height: 1.75rem; border-radius: 50%;
     border: 1px solid var(--edge-hi);
-    font-size: 0.85rem; color: var(--ink-2);
-    margin-bottom: 0.9rem;
+    font-size: 0.85rem; color: var(--accent);
+    font-weight: 600;
+    position: absolute;
+    right: 1.5rem;
+    top: 1.5rem;
   }
-  .steps h3 { margin: 0 0 0.35rem; font-size: 1.08rem; font-weight: 600; }
-  .steps p { margin: 0; color: var(--ink-2); font-size: 0.98rem; }
+
+  .steps li {
+    position: relative;
+  }
+
+  .steps h3 { margin: 0 0 0.6rem; font-size: 1.15rem; font-weight: 600; }
+  .steps p { margin: 0; color: var(--ink-2); font-size: 0.98rem; line-height: 1.5; }
+
+  /* Features section */
+  .features {
+    padding: 5rem 1.5rem;
+    max-width: 62rem;
+    margin: 0 auto;
+  }
+
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .feature-card {
+    padding: 2rem;
+    border-radius: 16px;
+    background: var(--glass);
+    border: 1px solid var(--edge);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    transition: all 300ms ease;
+  }
+
+  .feature-card:hover {
+    border-color: var(--edge-hi);
+    background: rgba(111,140,255,0.06);
+    transform: translateY(-2px);
+  }
+
+  .feature-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .feature-card h3 {
+    font-size: 1.15rem;
+    margin: 0 0 0.7rem;
+    font-weight: 600;
+  }
+
+  .feature-card p {
+    margin: 0;
+    color: var(--ink-2);
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+
+  /* FAQ Section */
+  .faq {
+    padding: 5rem 1.5rem 6rem;
+    max-width: 52rem;
+    margin: 0 auto;
+  }
+
+  .faq-item {
+    margin-bottom: 1.2rem;
+    border-radius: 12px;
+    border: 1px solid var(--edge);
+    background: var(--glass);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    overflow: hidden;
+    transition: all 200ms ease;
+  }
+
+  .faq-item:hover {
+    border-color: var(--edge-hi);
+  }
+
+  .faq-question {
+    padding: 1.5rem;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 500;
+    user-select: none;
+    transition: color 200ms ease;
+  }
+
+  .faq-question:hover {
+    color: var(--accent);
+  }
+
+  .faq-icon {
+    font-size: 1.2rem;
+    transition: transform 300ms ease;
+    margin-left: 1rem;
+  }
+
+  .faq-item.open .faq-icon {
+    transform: rotate(180deg);
+  }
+
+  .faq-answer {
+    padding: 0 1.5rem 1.5rem;
+    color: var(--ink-2);
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 300ms ease, padding 300ms ease;
+    line-height: 1.6;
+  }
+
+  .faq-item.open .faq-answer {
+    max-height: 500px;
+    padding: 0 1.5rem 1.5rem;
+  }
 
   footer {
     position: relative; z-index: 1;
     text-align: center;
-    padding: 0 1.5rem 2.5rem;
+    padding: 3rem 1.5rem 2.5rem;
     color: var(--ink-3);
     font-size: 0.85rem;
+    border-top: 1px solid var(--edge);
   }
 
-  @media (max-width: 680px) {
+  @media (max-width: 768px) {
     .steps { grid-template-columns: 1fr; }
     .btn { width: 100%; justify-content: center; }
+    .section-title { font-size: 1.6rem; }
   }
 
-  /* one orchestrated entrance, nothing else */
+  /* Scroll animations */
   @media (prefers-reduced-motion: no-preference) {
     .wordmark span { animation: recall 900ms cubic-bezier(.2,.7,.2,1) both; animation-delay: calc(var(--i) * 45ms); }
-    .lede, .downloads, .fine { animation: rise 700ms ease both; animation-delay: 500ms; }
+    .tagline, .lede, .downloads, .fine { animation: rise 700ms ease both; animation-delay: 500ms; }
+    .section-title { animation: fadeInUp 800ms ease both; }
+    .feature-card { animation: fadeInUp 600ms ease both; }
+    .feature-card:nth-child(1) { animation-delay: 100ms; }
+    .feature-card:nth-child(2) { animation-delay: 200ms; }
+    .feature-card:nth-child(3) { animation-delay: 300ms; }
+    .steps li { animation: fadeInUp 600ms ease both; }
+    .steps li:nth-child(1) { animation-delay: 100ms; }
+    .steps li:nth-child(2) { animation-delay: 200ms; }
+    .steps li:nth-child(3) { animation-delay: 300ms; }
+
     @keyframes recall { from { opacity: 0; filter: blur(8px); transform: translateY(8px); } to { opacity: var(--o); filter: blur(var(--b)); transform: translateY(0); } }
     @keyframes rise { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
   }
 </style>
 </head>
@@ -203,14 +375,12 @@
 <main>
   <section class="hero">
     <div class="hero-inner">
+      <p class="tagline">Start Fresh</p>
       <h1 class="wordmark" aria-label="Amnesiac">
         <span style="--i:0">A</span><span style="--i:1">m</span><span style="--i:2">n</span><span style="--i:3">e</span><span style="--i:4">s</span><span style="--i:5">i</span><span style="--i:6">a</span><span style="--i:7">c</span>
       </h1>
-      <p class="lede">Wipe the save data from the games that came with your computer, and play them like the first time.</p>
+      <p class="lede">Reset any pre-installed app on your Mac or PC. Wipe save data, reclaim space, and restore default settings—without touching anything else.</p>
 
-      <!-- ===== DOWNLOAD LINKS =====
-           Replace the two href="#" values below with the real download URLs
-           (e.g. a GitHub release asset). Nothing else needs to change. -->
       <div class="downloads">
         <a class="btn" href="#" download>
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16.4 12.6c0-2.4 2-3.6 2.1-3.6-1.1-1.7-2.9-1.9-3.5-1.9-1.5-.2-2.9.9-3.7.9-.8 0-1.9-.9-3.2-.8-1.6 0-3.1 1-4 2.4-1.7 3-.4 7.3 1.2 9.7.8 1.2 1.8 2.5 3.1 2.4 1.2 0 1.7-.8 3.2-.8s1.9.8 3.2.8c1.3 0 2.2-1.2 3-2.4.9-1.4 1.3-2.7 1.4-2.8-.1 0-2.8-1.1-2.8-3.9zM14 5.5c.7-.8 1.1-2 1-3.1-1 0-2.2.7-2.9 1.5-.6.7-1.2 1.9-1 3 1.1.1 2.2-.6 2.9-1.4z"/></svg>
@@ -221,29 +391,123 @@
           Download for Windows
         </a>
       </div>
-      <p class="fine">Works with the games that ship with macOS and Windows.</p>
+      <p class="fine">Works with any pre-installed app that comes with macOS and Windows.</p>
     </div>
   </section>
 
   <section class="how" aria-labelledby="how-title">
-    <h2 id="how-title">How it works</h2>
+    <h2 class="section-title" id="how-title">How it works</h2>
     <ol class="steps">
       <li>
-        <h3>Open Amnesiac</h3>
-        <p>It finds the built-in games on your Mac or PC and lists them.</p>
+        <div class="step-icon">🔍</div>
+        <h3>Scan & Discover</h3>
+        <p>Amnesiac finds all pre-installed apps on your computer and shows you which ones have data to reset.</p>
       </li>
       <li>
-        <h3>Pick a game to forget</h3>
-        <p>Choose which saves, stats and high scores it should lose.</p>
+        <div class="step-icon">✓</div>
+        <h3>Choose & Customize</h3>
+        <p>Select exactly which apps and data you want to reset. You're always in control of what gets wiped.</p>
       </li>
       <li>
-        <h3>Start over</h3>
-        <p>The game opens as if you'd never played it. Nothing else on your computer is touched.</p>
+        <div class="step-icon">⚡</div>
+        <h3>Reset & Restart</h3>
+        <p>Instantly reset your apps to factory defaults. Everything else on your computer remains untouched.</p>
       </li>
     </ol>
   </section>
+
+  <section class="features" aria-labelledby="features-title">
+    <h2 class="section-title" id="features-title">Why use Amnesiac</h2>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">🎮</div>
+        <h3>Beat the Challenge</h3>
+        <p>Replay built-in games from the beginning. Experience them fresh without previous progress haunting your score.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">💾</div>
+        <h3>Reclaim Space</h3>
+        <p>Pre-installed apps accumulate cached data and saves over time. Clearing them frees up disk space quickly.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🔄</div>
+        <h3>Restore Defaults</h3>
+        <p>Reset configurations and preferences to their original state. Perfect for fixing corrupted settings or starting over.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🛡️</div>
+        <h3>Safe & Selective</h3>
+        <p>Only affects pre-installed apps. Your personal files, documents, and photos remain completely safe.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">⚙️</div>
+        <h3>One-Click Simplicity</h3>
+        <p>No technical knowledge required. Intuitive interface makes resetting apps as simple as a few clicks.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🎯</div>
+        <h3>Precise Control</h3>
+        <p>Choose individual apps or batch reset multiple apps at once. You decide exactly what gets reset.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="faq" aria-labelledby="faq-title">
+    <h2 class="section-title" id="faq-title">Frequently Asked Questions</h2>
+    <div id="faq-container"></div>
+  </section>
 </main>
 
-<footer>Made by two friends who wanted to beat Solitaire again.</footer>
+<footer>Made by two friends who wanted to beat Solitaire again—and so much more.</footer>
+
+<script>
+  const faqs = [
+    {
+      question: "What pre-installed apps can Amnesiac reset?",
+      answer: "Amnesiac works with any pre-installed app that ships with macOS (like Games, Chess, Solitaire, etc.) and Windows (like Minesweeper, Solitaire, etc.). It can also reset other bundled applications and their associated user data."
+    },
+    {
+      question: "Will Amnesiac affect my other files and apps?",
+      answer: "No. Amnesiac only resets the selected pre-installed apps and their data. Your personal files, documents, photos, installed applications, and system settings remain completely untouched and safe."
+    },
+    {
+      question: "Can I reset multiple apps at once?",
+      answer: "Yes! You can batch select multiple apps and reset them all in one go. Amnesiac also lets you preview exactly what will be deleted before confirming the reset."
+    },
+    {
+      question: "Is the reset reversible?",
+      answer: "Once you reset an app, the saved data is permanently deleted. We recommend backing up important data before using Amnesiac, just to be safe."
+    },
+    {
+      question: "Does Amnesiac require administrator privileges?",
+      answer: "Yes, because resetting pre-installed apps requires system-level access. You'll be prompted for your password when running Amnesiac for the first time."
+    },
+    {
+      question: "What platforms does Amnesiac support?",
+      answer: "Amnesiac is available for macOS and Windows. Download the version that matches your operating system from the main page."
+    }
+  ];
+
+  const container = document.getElementById('faq-container');
+
+  faqs.forEach((faq, index) => {
+    const item = document.createElement('div');
+    item.className = 'faq-item';
+    item.innerHTML = `
+      <div class="faq-question">
+        <span>${faq.question}</span>
+        <span class="faq-icon">▼</span>
+      </div>
+      <div class="faq-answer">${faq.answer}</div>
+    `;
+
+    const question = item.querySelector('.faq-question');
+    question.addEventListener('click', () => {
+      item.classList.toggle('open');
+    });
+
+    container.appendChild(item);
+  });
+</script>
 </body>
 </html>
