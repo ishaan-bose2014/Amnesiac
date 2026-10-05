@@ -228,6 +228,17 @@
   .btn:hover { border-color: var(--edge-hi); transform: translateY(-1px); background: linear-gradient(180deg, rgba(255,255,255,0.12), rgba(255,255,255,0.06)); }
   .btn:active { transform: translateY(0); }
   .btn:focus-visible { outline: 2px solid var(--glow-b); outline-offset: 3px; }
+
+  :root[data-theme="light"] .btn {
+    background: linear-gradient(180deg, rgba(0,0,0,0.08), rgba(0,0,0,0.04));
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.8),
+      inset 0 -1px 0 rgba(0,0,0,0.1),
+      0 4px 12px rgba(0,0,0,0.1);
+  }
+  :root[data-theme="light"] .btn:hover {
+    background: linear-gradient(180deg, rgba(0,0,0,0.12), rgba(0,0,0,0.06));
+  }
   .btn svg { width: 18px; height: 18px; fill: currentColor; opacity: 0.9; }
 
   .fine {
@@ -281,19 +292,6 @@
     box-shadow: inset 0 1px 0 rgba(255,255,255,0.10), 0 20px 40px rgba(111,140,255,0.15);
   }
 
-  .step-icon {
-    width: 3rem;
-    height: 3rem;
-    margin: 0 auto 1rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: linear-gradient(135deg, rgba(79,157,255,0.2), rgba(154,216,255,0.1));
-    border-radius: 12px;
-    border: 1px solid var(--edge-hi);
-    font-size: 1.5rem;
-  }
-
   .steps li::before {
     content: counter(step);
     display: inline-grid; place-items: center;
@@ -340,11 +338,6 @@
     border-color: var(--edge-hi);
     background: rgba(111,140,255,0.06);
     transform: translateY(-2px);
-  }
-
-  .feature-icon {
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
   }
 
   .feature-card h3 {
@@ -566,17 +559,14 @@
     <h2 class="section-title" id="how-title">How it works</h2>
     <ol class="steps">
       <li>
-        <div class="step-icon">🔍</div>
         <h3>Scan & Discover</h3>
         <p>Amnesiac finds all pre-installed apps on your computer and shows you which ones have data to reset.</p>
       </li>
       <li>
-        <div class="step-icon">✓</div>
         <h3>Choose & Customize</h3>
         <p>Select exactly which apps and data you want to reset. You're always in control of what gets wiped.</p>
       </li>
       <li>
-        <div class="step-icon">⚡</div>
         <h3>Reset & Restart</h3>
         <p>Instantly reset your apps to factory defaults. Everything else on your computer remains untouched.</p>
       </li>
@@ -587,32 +577,26 @@
     <h2 class="section-title" id="features-title">Why use Amnesiac</h2>
     <div class="features-grid">
       <div class="feature-card">
-        <div class="feature-icon">🎮</div>
         <h3>Beat the Challenge</h3>
         <p>Replay built-in games from the beginning. Experience them fresh without previous progress haunting your score.</p>
       </div>
       <div class="feature-card">
-        <div class="feature-icon">💾</div>
         <h3>Reclaim Space</h3>
         <p>Pre-installed apps accumulate cached data and saves over time. Clearing them frees up disk space quickly.</p>
       </div>
       <div class="feature-card">
-        <div class="feature-icon">🔄</div>
         <h3>Restore Defaults</h3>
         <p>Reset configurations and preferences to their original state. Perfect for fixing corrupted settings or starting over.</p>
       </div>
       <div class="feature-card">
-        <div class="feature-icon">🛡️</div>
         <h3>Safe & Selective</h3>
         <p>Only affects pre-installed apps. Your personal files, documents, and photos remain completely safe.</p>
       </div>
       <div class="feature-card">
-        <div class="feature-icon">⚙️</div>
         <h3>One-Click Simplicity</h3>
         <p>No technical knowledge required. Intuitive interface makes resetting apps as simple as a few clicks.</p>
       </div>
       <div class="feature-card">
-        <div class="feature-icon">🎯</div>
         <h3>Precise Control</h3>
         <p>Choose individual apps or batch reset multiple apps at once. You decide exactly what gets reset.</p>
       </div>
